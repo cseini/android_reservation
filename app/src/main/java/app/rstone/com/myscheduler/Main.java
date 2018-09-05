@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Main extends AppCompatActivity {
-    String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +31,8 @@ public class Main extends AppCompatActivity {
         TextView hour = findViewById(R.id.hour);
         TextView minute = findViewById(R.id.minute);
         time.setVisibility(View.INVISIBLE);
+        class MyDate{String year, month ,day, hour, minute;}
+        final MyDate m = new MyDate();
         findViewById(R.id.rdoCalendar).setOnClickListener(
             (View v)->{
                 calender.setVisibility(View.VISIBLE);
@@ -46,9 +47,9 @@ public class Main extends AppCompatActivity {
         );
         findViewById(R.id.btnEnd).setOnClickListener(
             (View v)->{
-                year.setText(date.substring(0,date.indexOf("/")));
-                month.setText(date.substring(date.indexOf("/")+1,date.lastIndexOf("/")));
-                day.setText(date.substring(date.lastIndexOf("/")+1));
+                year.setText(m.year);
+                month.setText(m.minute);
+                day.setText(m.day);
                 hour.setText(String.valueOf(time.getHour()));
                 minute.setText(String.valueOf(time.getMinute()));
                 }
@@ -56,7 +57,9 @@ public class Main extends AppCompatActivity {
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                date = year+"/"+month+"/"+dayOfMonth;
+                m.year=year+"";
+                m.month=month+1+"";
+                m.day=dayOfMonth+"";
             }
         });
     }
